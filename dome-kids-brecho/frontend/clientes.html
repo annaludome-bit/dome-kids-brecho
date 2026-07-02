@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dome & Kids · Clientes</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="varal">
+    <div class="varal__corda"></div>
+    <div class="varal__conteudo">
+        <a href="index.html" class="varal__marca">
+            <strong>Dome & Kids</strong>
+            <span>Brecho Infantil</span>
+        </a>
+        <ul class="varal__links">
+            <li><a href="index.html">Painel</a></li>
+            <li><a href="roupas.html">Roupas</a></li>
+            <li><a href="clientes.html" class="ativo">Clientes</a></li>
+            <li><a href="vendas.html">Vendas</a></li>
+        </ul>
+    </div>
+</header>
+
+<main class="pagina">
+    <div class="cabecalho-pagina">
+        <div>
+            <span class="eyebrow">Familias atendidas</span>
+            <h1>Clientes</h1>
+            <p>Cadastre e gerencie os contatos das familias que compram no brecho.</p>
+        </div>
+        <button class="btn btn-primario" id="btn-novo-cliente">+ Novo cliente</button>
+    </div>
+
+    <div class="tabela-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>E-mail</th>
+                    <th>Cadastrado em</th>
+                    <th>Acoes</th>
+                </tr>
+            </thead>
+            <tbody id="lista-clientes">
+                <tr><td colspan="5">Carregando clientes...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer class="rodape">
+    Dome & Kids · Sistema de Gestao e Vendas · Trabalho de Programacao II
+</footer>
+
+<!-- Modal de cadastro/edicao -->
+<div class="modal-fundo" id="modal-cliente">
+    <div class="modal">
+        <button class="modal__fechar" id="fechar-modal-cliente" aria-label="Fechar">✕</button>
+        <h2 id="titulo-modal-cliente">Novo cliente</h2>
+        <form id="form-cliente">
+            <input type="hidden" id="cliente-id">
+
+            <div class="campo">
+                <label for="cliente-nome">Nome completo *</label>
+                <input type="text" id="cliente-nome" required placeholder="Ex: Mariana Souza">
+            </div>
+            <div class="campo">
+                <label for="cliente-telefone">Telefone</label>
+                <input type="text" id="cliente-telefone" placeholder="(35) 99999-9999">
+            </div>
+            <div class="campo">
+                <label for="cliente-email">E-mail</label>
+                <input type="email" id="cliente-email" placeholder="nome@email.com">
+            </div>
+
+            <div class="form-acoes">
+                <button type="button" class="btn btn-fantasma" id="cancelar-cliente">Cancelar</button>
+                <button type="submit" class="btn btn-primario">Salvar cliente</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/clientes.js"></script>
+</body>
+</html>

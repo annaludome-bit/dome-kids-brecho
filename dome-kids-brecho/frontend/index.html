@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dome & Kids · Painel</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="varal">
+    <div class="varal__corda"></div>
+    <div class="varal__conteudo">
+        <a href="index.html" class="varal__marca">
+            <strong>Dome & Kids</strong>
+            <span>Brecho Infantil</span>
+        </a>
+        <ul class="varal__links">
+            <li><a href="index.html" class="ativo">Painel</a></li>
+            <li><a href="roupas.html">Roupas</a></li>
+            <li><a href="clientes.html">Clientes</a></li>
+            <li><a href="vendas.html">Vendas</a></li>
+        </ul>
+    </div>
+</header>
+
+<main class="pagina">
+    <div class="cabecalho-pagina">
+        <div>
+            <span class="eyebrow">Bem-vindo(a) de volta</span>
+            <h1>Painel geral</h1>
+            <p>Um resumo rapido do estoque, clientes e vendas do brecho.</p>
+        </div>
+    </div>
+
+    <section class="grade-dashboard" id="grade-estatisticas">
+        <div class="cartao-estat">
+            <span class="numero" id="estat-pecas">--</span>
+            <span class="rotulo">Pecas em estoque</span>
+        </div>
+        <div class="cartao-estat mostarda">
+            <span class="numero" id="estat-clientes">--</span>
+            <span class="rotulo">Clientes cadastrados</span>
+        </div>
+        <div class="cartao-estat rosa">
+            <span class="numero" id="estat-vendas">--</span>
+            <span class="rotulo">Vendas realizadas</span>
+        </div>
+        <div class="cartao-estat">
+            <span class="numero" id="estat-receita">--</span>
+            <span class="rotulo">Receita total</span>
+        </div>
+    </section>
+
+    <h2>Acesso rapido</h2>
+    <section class="grade-atalhos">
+        <a class="atalho" href="roupas.html">
+            <span class="icone">🧸</span>
+            <h3>Cadastro de Roupas</h3>
+            <p>Cadastre, edite e controle o estoque das pecas do brecho.</p>
+        </a>
+        <a class="atalho" href="clientes.html">
+            <span class="icone">👪</span>
+            <h3>Clientes</h3>
+            <p>Gerencie os dados de contato das familias atendidas.</p>
+        </a>
+        <a class="atalho" href="vendas.html">
+            <span class="icone">🛍️</span>
+            <h3>Vendas</h3>
+            <p>Registre novas vendas e consulte o historico de compras.</p>
+        </a>
+    </section>
+</main>
+
+<footer class="rodape">
+    Dome & Kids · Sistema de Gestao e Vendas · Trabalho de Programacao II
+</footer>
+
+<script src="js/api.js"></script>
+<script>
+    async function carregarEstatisticas() {
+        try {
+            const [roupas, clientes, vendas] = await Promise.all([
+                api.get('/roupas/listar'),
+                api.get('/clientes/listar'),
+                api.get('/vendas/listar')
+            ]);
+
+            const totalPecas = roupas.reduce((soma, r) => soma + r.quantidade, 0);
+            const receitaTotal = vendas
+                .filter(v => v.status !== 'Cancelada')
+                .reduce((soma, v) => soma + v.total, 0);
+
+            document.getElementById('estat-pecas').textContent = totalPecas;
+            document.getElementById('estat-clientes').textContent = clientes.length;
+            document.getElementById('estat-vendas').textContent = vendas.length;
+            document.getElementById('estat-receita').textContent = formatarMoeda(receitaTotal);
+        } catch (erro) {
+            mostrarAlerta('Nao foi possivel carregar os dados. Verifique se o back-end esta rodando.', 'erro');
+        }
+    }
+
+    carregarEstatisticas();
+</script>
+</body>
+</html>

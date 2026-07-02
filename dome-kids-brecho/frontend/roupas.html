@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dome & Kids · Roupas</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="varal">
+    <div class="varal__corda"></div>
+    <div class="varal__conteudo">
+        <a href="index.html" class="varal__marca">
+            <strong>Dome & Kids</strong>
+            <span>Brecho Infantil</span>
+        </a>
+        <ul class="varal__links">
+            <li><a href="index.html">Painel</a></li>
+            <li><a href="roupas.html" class="ativo">Roupas</a></li>
+            <li><a href="clientes.html">Clientes</a></li>
+            <li><a href="vendas.html">Vendas</a></li>
+        </ul>
+    </div>
+</header>
+
+<main class="pagina">
+    <div class="cabecalho-pagina">
+        <div>
+            <span class="eyebrow">Estoque</span>
+            <h1>Cadastro de Roupas</h1>
+            <p>Cadastre novas pecas, edite informacoes e acompanhe o estoque do brecho.</p>
+        </div>
+        <button class="btn btn-primario" id="btn-nova-roupa">+ Nova peca</button>
+    </div>
+
+    <div class="grade-form" style="margin-bottom: 1.5rem;">
+        <div class="campo" style="margin-bottom:0;">
+            <label for="filtro-busca">Buscar por nome</label>
+            <input type="text" id="filtro-busca" placeholder="Ex: vestido, macacao...">
+        </div>
+        <div class="campo" style="margin-bottom:0;">
+            <label for="filtro-categoria">Categoria</label>
+            <select id="filtro-categoria">
+                <option value="">Todas</option>
+                <option value="Bebe">Bebe</option>
+                <option value="Menina">Menina</option>
+                <option value="Menino">Menino</option>
+                <option value="Calcados">Calcados</option>
+                <option value="Acessorios">Acessorios</option>
+            </select>
+        </div>
+    </div>
+
+    <section class="grade-cartoes" id="lista-roupas">
+        <p class="vazio">Carregando pecas...</p>
+    </section>
+</main>
+
+<footer class="rodape">
+    Dome & Kids · Sistema de Gestao e Vendas · Trabalho de Programacao II
+</footer>
+
+<!-- Modal de cadastro/edicao -->
+<div class="modal-fundo" id="modal-roupa">
+    <div class="modal">
+        <button class="modal__fechar" id="fechar-modal-roupa" aria-label="Fechar">✕</button>
+        <h2 id="titulo-modal-roupa">Nova peca</h2>
+        <form id="form-roupa">
+            <input type="hidden" id="roupa-id">
+
+            <div class="campo">
+                <label for="roupa-nome">Nome da peca *</label>
+                <input type="text" id="roupa-nome" required placeholder="Ex: Vestido Xadrez">
+            </div>
+
+            <div class="grade-form">
+                <div class="campo">
+                    <label for="roupa-categoria">Categoria *</label>
+                    <select id="roupa-categoria" required>
+                        <option value="Bebe">Bebe</option>
+                        <option value="Menina">Menina</option>
+                        <option value="Menino">Menino</option>
+                        <option value="Calcados">Calcados</option>
+                        <option value="Acessorios">Acessorios</option>
+                    </select>
+                </div>
+                <div class="campo">
+                    <label for="roupa-tamanho">Tamanho *</label>
+                    <input type="text" id="roupa-tamanho" required placeholder="Ex: 4, RN, P">
+                </div>
+            </div>
+
+            <div class="grade-form">
+                <div class="campo">
+                    <label for="roupa-cor">Cor</label>
+                    <input type="text" id="roupa-cor" placeholder="Ex: Azul">
+                </div>
+                <div class="campo">
+                    <label for="roupa-condicao">Condicao</label>
+                    <select id="roupa-condicao">
+                        <option value="Novo">Novo</option>
+                        <option value="Seminovo" selected>Seminovo</option>
+                        <option value="Usado">Usado</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grade-form">
+                <div class="campo">
+                    <label for="roupa-preco">Preco (R$) *</label>
+                    <input type="number" id="roupa-preco" min="0" step="0.01" required placeholder="0,00">
+                </div>
+                <div class="campo">
+                    <label for="roupa-quantidade">Quantidade em estoque *</label>
+                    <input type="number" id="roupa-quantidade" min="0" step="1" required value="1">
+                </div>
+            </div>
+
+            <div class="campo">
+                <label for="roupa-descricao">Descricao</label>
+                <textarea id="roupa-descricao" placeholder="Detalhes sobre a peca, estado de conservacao, etc."></textarea>
+            </div>
+
+            <div class="form-acoes">
+                <button type="button" class="btn btn-fantasma" id="cancelar-roupa">Cancelar</button>
+                <button type="submit" class="btn btn-primario">Salvar peca</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/roupas.js"></script>
+</body>
+</html>
